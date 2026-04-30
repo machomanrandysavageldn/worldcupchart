@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  background: #FFF6E5;
+  color: #0B132B;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display { font-family: 'Bebas Neue', Impact, system-ui, sans-serif; letter-spacing: 0.02em; }
+
+/* Pitch stripes background */
+.pitch-bg {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(14, 124, 58, 0.96) 0 80px,
+    rgba(14, 124, 58, 0.85) 80px 160px
+  );
+}
+
+.scribble-underline {
+  background-image: linear-gradient(transparent 60%, #FFC83D 60%);
+  padding: 0 0.1em;
+}
+
+.chunky-card {
+  border: 3px solid #0B132B;
+  border-radius: 18px;
+  box-shadow: 6px 6px 0 0 #0B132B;
+  background: white;
+}
+.chunky-btn {
+  border: 3px solid #0B132B;
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 0 #0B132B;
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.chunky-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 0 #0B132B; }
+
+.dotted {
+  background-image: radial-gradient(rgba(11,19,43,.18) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(540deg); opacity: 0; }
+}
