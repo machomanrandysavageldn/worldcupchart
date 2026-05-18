@@ -22,8 +22,21 @@ export default async function GroupPage({ params }: { params: Promise<{ code: st
   return (
     <Section title={`Group ${upper}`} kicker={`${teams.length} teams · ${matches.length} matches`}>
       <div className={`chunky-card p-6 mb-6 ${GROUP_COLORS[upper]} text-white`}>
-        <div className="font-display text-5xl">Group {upper}</div>
-        <div className="opacity-90 mt-1">Tap a team to see their fixtures.</div>
+        <div className="flex items-center gap-4 flex-wrap">
+          <div className="font-display text-5xl leading-none">Group {upper}</div>
+          <div className="flex items-center gap-2 text-3xl">
+            {teams.map((t) => (
+              <Link key={t} href={`/teams/${t}`} title={teamName(t)} className="hover:scale-110 transition">
+                {teamFlag(t)}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div className="opacity-90 mt-3 text-sm md:text-base max-w-2xl">
+          Four teams, six matches. <strong>The top two finish in each group</strong> qualify
+          for the Round of 32 automatically, joined by the eight best third-placed teams from
+          across all 12 groups. Tap a flag for that team&rsquo;s fixtures and squad.
+        </div>
       </div>
 
       <div className="grid md:grid-cols-[1fr_1fr] gap-6">
