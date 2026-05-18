@@ -39,6 +39,7 @@ async function fetchFeed(source: string, url: string): Promise<NewsItem[]> {
       source,
       pubDate: it.pubDate ?? it.published ?? it.updated ?? new Date().toISOString(),
       summary: typeof it.description === "string" ? stripHtml(it.description) : it.summary ?? "",
+      image: extractImage(it),
     }));
   } catch {
     return [];
@@ -47,6 +48,26 @@ async function fetchFeed(source: string, url: string): Promise<NewsItem[]> {
 
 function stripHtml(s: string) {
   return s.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim().slice(0, 240);
+}
+
+function extractImage(it: any): string | undefined {
+  // RSS feeds expose images in many shapes; check the common ones.
+  const mediaThumb = it["media:thumbnail"];
+  if (mediaThumb) {
+    if (Array.isArray(mediaThumb)) return mediaThumb[0]?.["@_url"];
+    return mediaThumb["@_url"];
+  }
+  const mediaContent = it["media:content"];
+  if (mediaContent) {
+    if (Array.isArray(mediaContent)) return mediaContent[0]?.["@_url"];
+    return mediaContent["@_url"];
+  }
+  const enclosure = it.enclosure;
+  if (enclosure?.["@_url"] && /image/.test(enclosure?.["@_type"] ?? "")) return enclosure["@_url"];
+  // Last resort: scrape the first <img src> from description HTML.
+  const desc = typeof it.description === "string" ? it.description : "";
+  const m = desc.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return m?.[1];
 }
 
 function isRelevant(item: NewsItem) {

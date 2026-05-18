@@ -1,13 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Venue } from "@/lib/venues";
 import type { WikiSummary } from "@/lib/wiki";
 
 export function CityCard({ venue, wiki }: { venue: Venue; wiki: WikiSummary | null }) {
   const [open, setOpen] = useState(false);
+  const [placement, setPlacement] = useState<"bottom" | "top">("bottom");
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!open || !wrapRef.current) return;
+    const rect = wrapRef.current.getBoundingClientRect();
+    const POPUP_EST = 280;
+    const spaceBelow = window.innerHeight - rect.bottom;
+    setPlacement(spaceBelow < POPUP_EST && rect.top > POPUP_EST ? "top" : "bottom");
+  }, [open]);
+
   return (
     <div
+      ref={wrapRef}
       className="relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
@@ -28,11 +40,13 @@ export function CityCard({ venue, wiki }: { venue: Venue; wiki: WikiSummary | nu
       <AnimatePresence>
         {open && wiki && (
           <motion.div
-            initial={{ opacity: 0, y: 6, scale: 0.98 }}
+            initial={{ opacity: 0, y: placement === "bottom" ? 6 : -6, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 6, scale: 0.98 }}
+            exit={{ opacity: 0, y: placement === "bottom" ? 6 : -6, scale: 0.98 }}
             transition={{ duration: 0.15 }}
-            className="absolute left-0 right-0 top-full mt-2 z-30 chunky-card bg-white text-wc-ink p-3 max-w-sm"
+            className={`absolute left-0 right-0 z-30 chunky-card bg-white text-wc-ink p-3 max-w-sm ${
+              placement === "bottom" ? "top-full mt-2" : "bottom-full mb-2"
+            }`}
             style={{ boxShadow: "8px 8px 0 0 #0B132B" }}
           >
             {wiki.thumbnail?.source && (

@@ -52,6 +52,7 @@ export interface NewsItem {
   source: string;
   pubDate: string;
   summary?: string;
+  image?: string;
 }
 
 export interface LiveState {
