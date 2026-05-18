@@ -11,12 +11,19 @@
 // Any team without an entry falls back to a "Key figures to be confirmed" card —
 // which is the right answer when we don't have stable data.
 
-export type KeyFigure = { name: string; wiki?: string };
+export type KeyFigure = { name: string; wiki?: string; position?: string };
 export type SquadInfo = {
   manager?: KeyFigure;
   captain?: KeyFigure;
   topScorer?: KeyFigure;
+  // Optional notable subset shown when no full squad has been announced yet.
   notable?: KeyFigure[];
+  // Full 26-player squad once announced. When present, the team page renders
+  // the full list instead of just the notable subset.
+  fullSquad?: KeyFigure[];
+  // ISO date when the federation is expected to announce its final squad.
+  // Used to message users honestly until the list lands.
+  squadAnnouncementDue?: string;
   note?: string;
 };
 
@@ -27,6 +34,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Thomas Tuchel" },
     captain: { name: "Harry Kane" },
     topScorer: { name: "Harry Kane" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Jude Bellingham" },
       { name: "Phil Foden" },
@@ -42,6 +50,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Didier Deschamps" },
     captain: { name: "Kylian Mbappé", wiki: "Kylian_Mbappé" },
     topScorer: { name: "Kylian Mbappé", wiki: "Kylian_Mbappé" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Antoine Griezmann" },
       { name: "Aurélien Tchouaméni", wiki: "Aurélien_Tchouaméni" },
@@ -57,6 +66,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Lionel Scaloni" },
     captain: { name: "Lionel Messi" },
     topScorer: { name: "Lionel Messi" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Emiliano Martínez", wiki: "Emiliano_Martínez_(footballer,_born_1992)" },
       { name: "Nicolás Otamendi", wiki: "Nicolás_Otamendi" },
@@ -71,6 +81,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Carlo Ancelotti" },
     captain: { name: "Marquinhos" },
     topScorer: { name: "Neymar" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Vinícius Júnior", wiki: "Vinícius_Júnior" },
       { name: "Rodrygo" },
@@ -85,6 +96,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Luis de la Fuente" },
     captain: { name: "Álvaro Morata", wiki: "Álvaro_Morata" },
     topScorer: { name: "Álvaro Morata", wiki: "Álvaro_Morata" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Lamine Yamal" },
       { name: "Rodri", wiki: "Rodri_(footballer,_born_2002)" },
@@ -99,6 +111,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Roberto Martínez", wiki: "Roberto_Martínez_(footballer)" },
     captain: { name: "Cristiano Ronaldo" },
     topScorer: { name: "Cristiano Ronaldo" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Bernardo Silva" },
       { name: "Bruno Fernandes" },
@@ -112,6 +125,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Julian Nagelsmann" },
     captain: { name: "Joshua Kimmich" },
     topScorer: { name: "Kai Havertz" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Florian Wirtz" },
       { name: "Jamal Musiala" },
@@ -125,6 +139,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Ronald Koeman" },
     captain: { name: "Virgil van Dijk" },
     topScorer: { name: "Memphis Depay" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Frenkie de Jong" },
       { name: "Cody Gakpo" },
@@ -137,6 +152,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Rudi Garcia" },
     captain: { name: "Kevin De Bruyne" },
     topScorer: { name: "Romelu Lukaku" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Thibaut Courtois" },
       { name: "Jérémy Doku", wiki: "Jérémy_Doku" },
@@ -148,6 +164,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Mauricio Pochettino" },
     captain: { name: "Christian Pulisic" },
     topScorer: { name: "Christian Pulisic" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Weston McKennie" },
       { name: "Tyler Adams" },
@@ -160,6 +177,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Javier Aguirre" },
     captain: { name: "Edson Álvarez", wiki: "Edson_Álvarez" },
     topScorer: { name: "Raúl Jiménez", wiki: "Raúl_Jiménez" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Hirving Lozano" },
       { name: "Guillermo Ochoa" },
@@ -170,6 +188,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Jesse Marsch" },
     captain: { name: "Alphonso Davies" },
     topScorer: { name: "Jonathan David" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Cyle Larin" },
       { name: "Stephen Eustáquio", wiki: "Stephen_Eustáquio" },
@@ -180,6 +199,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Zlatko Dalić" },
     captain: { name: "Luka Modrić", wiki: "Luka_Modrić" },
     topScorer: { name: "Luka Modrić", wiki: "Luka_Modrić" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Mateo Kovačić", wiki: "Mateo_Kovačić" },
       { name: "Joško Gvardiol", wiki: "Joško_Gvardiol" },
@@ -189,6 +209,7 @@ export const SQUADS: Record<string, SquadInfo> = {
   MAR: {
     captain: { name: "Achraf Hakimi" },
     topScorer: { name: "Youssef En-Nesyri" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Hakim Ziyech" },
       { name: "Sofyan Amrabat" },
@@ -198,6 +219,7 @@ export const SQUADS: Record<string, SquadInfo> = {
   SEN: {
     captain: { name: "Kalidou Koulibaly" },
     topScorer: { name: "Sadio Mané", wiki: "Sadio_Mané" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Édouard Mendy", wiki: "Édouard_Mendy" },
       { name: "Ismaïla Sarr", wiki: "Ismaïla_Sarr" },
@@ -207,6 +229,7 @@ export const SQUADS: Record<string, SquadInfo> = {
     manager: { name: "Hajime Moriyasu" },
     captain: { name: "Wataru Endo" },
     topScorer: { name: "Takefusa Kubo" },
+    squadAnnouncementDue: "late May 2026",
     notable: [
       { name: "Kaoru Mitoma" },
       { name: "Daichi Kamada" },
@@ -216,10 +239,12 @@ export const SQUADS: Record<string, SquadInfo> = {
   KOR: {
     captain: { name: "Son Heung-min" },
     topScorer: { name: "Son Heung-min" },
+    squadAnnouncementDue: "late May 2026",
     notable: [{ name: "Lee Kang-in" }, { name: "Kim Min-jae", wiki: "Kim_Min-jae_(footballer,_born_1996)" }],
   },
   AUS: {
     captain: { name: "Mathew Ryan" },
+    squadAnnouncementDue: "late May 2026",
     notable: [{ name: "Aaron Mooy" }, { name: "Mitchell Duke" }],
   },
 };

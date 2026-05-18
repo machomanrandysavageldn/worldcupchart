@@ -7,6 +7,7 @@ import { Mascot } from "@/components/Mascot";
 import { Section } from "@/components/Section";
 import { GROUP_LIST, GROUP_COLORS, GROUPS } from "@/lib/groups";
 import { teamFlag, teamName } from "@/lib/teams";
+import { detectWinner } from "@/lib/winner";
 
 export const revalidate = 3600;
 
@@ -16,9 +17,41 @@ export default async function HomePage() {
   const today = await matchesOnDay(new Date().toISOString());
   const opener = all[0];
   const final = all[all.length - 1];
+  const winner = await detectWinner();
 
   return (
     <>
+      {winner && (
+        <section className="bg-wc-gold border-b-[3px] border-wc-ink relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none dotted opacity-40" />
+          <div className="relative mx-auto max-w-7xl px-4 py-10 md:py-14 text-center">
+            <div className="text-xs md:text-sm uppercase tracking-[0.3em] font-bold text-wc-magenta">
+              World Cup 2026 · Champions
+            </div>
+            <div className="text-6xl md:text-7xl mt-2">🏆</div>
+            <h2 className="font-display text-5xl md:text-8xl leading-[0.95] mt-2 text-wc-ink">
+              <span className="text-5xl md:text-7xl mr-2">{winner.team.flag}</span>
+              {winner.team.name.toUpperCase()}
+            </h2>
+            <p className="font-display text-2xl md:text-4xl mt-2 text-wc-magenta">
+              are your World Cup champions!
+            </p>
+            <Link
+              href="/predictions"
+              className="chunky-btn inline-block mt-5 bg-wc-magenta text-white px-6 py-3 font-bold text-lg"
+            >
+              Update your predictions →
+            </Link>
+            <div className="text-xs text-wc-ink/70 mt-3">
+              Detected via {winner.source}.{" "}
+              <a className="underline" href={winner.url} target="_blank" rel="noopener noreferrer">
+                Read the story
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="relative overflow-hidden border-b-[3px] border-wc-ink pitch-markings">
         <div className="absolute inset-0 dotted opacity-40 pointer-events-none" />
         <div className="relative mx-auto max-w-7xl px-4 py-12 md:py-16 grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
@@ -27,13 +60,12 @@ export default async function HomePage() {
               11 June – 19 July 2026 · Canada · Mexico · USA
             </div>
             <h1 className="font-display text-6xl md:text-8xl leading-[0.9]">
-              The <span className="text-wc-magenta">family</span><br />
               World Cup<br />
-              <span className="text-wc-ink">tracker.</span>
+              <span className="text-wc-magenta">Watch.</span>
             </h1>
             <p className="mt-4 text-lg max-w-xl">
               Every fixture in UK time, who&rsquo;s on the BBC or ITV, group tables, the knockout
-              bracket, the latest news and a family predictions game. Built for the sofa.
+              stages, the latest news and a family predictions game. Built for the sofa.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/fixtures" className="chunky-btn bg-wc-magenta text-white px-5 py-2 font-bold">See all fixtures</Link>

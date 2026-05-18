@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Confetti } from "./Confetti";
 
 // The video to embed when a family member nails the champion pick.
-// Per requirements: https://www.youtube.com/watch?v=aTquMwTpuqg
-const VIDEO_ID = "aTquMwTpuqg";
+// Per requirements: https://www.youtube.com/watch?v=uvsPzuriDdA — looped.
+const VIDEO_ID = "uvsPzuriDdA";
 
 export function MaestroCelebration({
   open,
@@ -51,7 +51,8 @@ export function MaestroCelebration({
             {/* autoplay so the celebration fires automatically; muted to satisfy browser autoplay policies */}
             <iframe
               className="w-full h-full"
-              src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0&modestbranding=1`}
+              // YouTube requires `playlist=<id>` alongside `loop=1` to actually loop a single video.
+              src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&loop=1&playlist=${VIDEO_ID}&rel=0&modestbranding=1`}
               title="World Cup Maestro celebration"
               allow="autoplay; encrypted-media; picture-in-picture"
               allowFullScreen

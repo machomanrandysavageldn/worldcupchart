@@ -28,7 +28,10 @@ export default async function TeamPage({ params }: { params: Promise<{ code: str
     squad?.captain ? getPlayerInfo(squad.captain.name, squad.captain.wiki) : null,
     squad?.topScorer ? getPlayerInfo(squad.topScorer.name, squad.topScorer.wiki) : null,
   ]);
-  const notable = squad?.notable ? await getPlayersInfo(squad.notable) : [];
+  // Prefer the full squad when announced; otherwise fall back to the notable subset.
+  const roster = squad?.fullSquad ?? squad?.notable ?? [];
+  const rosterInfo = roster.length ? await getPlayersInfo(roster) : [];
+  const isFullSquad = !!squad?.fullSquad?.length;
 
   return (
     <Section title={team.name} kicker={`Team profile · ${matches.length} matches`}>
@@ -53,20 +56,32 @@ export default async function TeamPage({ params }: { params: Promise<{ code: str
             <KeyFigureCard label="Top scorer" emoji="⚽" color="bg-wc-coral" figure={squad.topScorer} info={topScorer} />
           </div>
 
-          {squad.notable && squad.notable.length > 0 && (
+          {roster.length > 0 && (
             <>
-              <h3 className="font-display text-2xl mb-3">Notable players</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-6">
-                {squad.notable.map((p, i) => (
-                  <PlayerCard key={p.name} figure={p} info={notable[i]} />
+              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+                <h3 className="font-display text-2xl">
+                  {isFullSquad ? `Full squad (${roster.length})` : "Notable players"}
+                </h3>
+                {!isFullSquad && (
+                  <span className="text-xs text-wc-cream bg-wc-ink/80 px-2 py-0.5 rounded">
+                    {squad.squadAnnouncementDue
+                      ? `Full 26-player squad expected ${squad.squadAnnouncementDue}`
+                      : "Full 26-player squad to be announced"}
+                  </span>
+                )}
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-6">
+                {roster.map((p, i) => (
+                  <PlayerCard key={p.name} figure={p} info={rosterInfo[i]} />
                 ))}
               </div>
             </>
           )}
 
           <p className="text-xs text-wc-cream bg-wc-ink/80 inline-block px-3 py-1.5 rounded mb-6">
-            Squad information is provisional — final squads are announced shortly before the tournament.
-            Player photos are sourced live from Wikipedia.
+            {isFullSquad
+              ? "Final 26-player squad as announced by the federation. Player photos are sourced live from Wikipedia."
+              : "Final squads are announced shortly before the tournament — this page will switch to the full 26-player list as soon as the federation publishes it. Player photos are sourced live from Wikipedia."}
           </p>
         </>
       ) : (

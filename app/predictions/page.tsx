@@ -233,32 +233,39 @@ export default function PredictionsPage() {
                 </p>
               </div>
 
-              {/* Result reveal — used once the real champion is known */}
-              <div className="mt-6 chunky-card p-5 bg-wc-ink text-wc-cream">
-                <div className="font-display text-2xl">When the tournament ends…</div>
-                <p className="text-sm text-wc-cream/80 mt-1">
-                  Set the actual champion below to reveal who got it right. Anyone whose pick matches
-                  gets the full Maestro celebration.
-                </p>
-                <div className="mt-3 flex flex-wrap gap-3 items-center">
-                  <select
-                    value={state.actualChampion ?? ""}
-                    onChange={(e) => setState({ ...state, actualChampion: e.target.value || null })}
-                    className="chunky-btn bg-white text-wc-ink px-3 py-2 font-semibold"
-                  >
-                    <option value="">— not yet —</option>
-                    {qualifiedCodes.map((c) => (
-                      <option key={c} value={c}>{teamFlag(c)} {teamName(c)}</option>
-                    ))}
-                  </select>
-                  {state.actualChampion && (
-                    <button
-                      onClick={() => setState({ ...state, actualChampion: null })}
-                      className="text-xs underline opacity-70"
+              {/* Result reveal — bright, centred, hard to miss once the final whistle blows. */}
+              <div className="mt-10 mx-auto max-w-3xl chunky-card p-8 md:p-10 bg-wc-magenta text-white text-center relative overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none opacity-20 dotted" />
+                <div className="relative">
+                  <div className="text-5xl mb-2">🏆</div>
+                  <div className="font-display text-3xl md:text-5xl leading-tight">
+                    When the tournament ends…
+                  </div>
+                  <p className="text-base md:text-lg mt-3 max-w-xl mx-auto">
+                    Pick the actual champion below to reveal who in the family got it right.
+                    Anyone whose pick matches gets the full <strong>Maestro</strong> celebration —
+                    confetti, fireworks, the lot.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3 items-center justify-center">
+                    <select
+                      value={state.actualChampion ?? ""}
+                      onChange={(e) => setState({ ...state, actualChampion: e.target.value || null })}
+                      className="chunky-btn bg-wc-gold text-wc-ink px-5 py-3 font-bold text-lg"
                     >
-                      Clear
-                    </button>
-                  )}
+                      <option value="">— pick the world champion —</option>
+                      {qualifiedCodes.map((c) => (
+                        <option key={c} value={c}>{teamFlag(c)} {teamName(c)}</option>
+                      ))}
+                    </select>
+                    {state.actualChampion && (
+                      <button
+                        onClick={() => setState({ ...state, actualChampion: null })}
+                        className="chunky-btn bg-white text-wc-ink px-4 py-2 font-bold text-sm"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </>

@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="border-t-[3px] border-wc-ink mt-16 bg-wc-deep text-wc-cream">
           <div className="mx-auto max-w-7xl px-4 py-8 text-sm flex flex-wrap gap-4 items-center">
             <Image src="/fifa/wordmark.png" alt="FIFA World Cup" width={140} height={20} />
-            <span>Family tracker · UK times · Non-commercial</span>
+            <span>World Cup Watch · Family · UK times · Non-commercial</span>
             <span className="ml-auto opacity-70">
               Data: Football-Data.org · BBC/Sky/Guardian RSS · FIFA editorial assets
             </span>
