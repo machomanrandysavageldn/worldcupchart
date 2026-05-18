@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
+import { BRAND_NAME_TOP, BRAND_NAME_BOTTOM, BRAND_DESCRIPTION, BRAND_TAGLINE } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "World Cup Tracker",
-  description:
-    "Family-friendly fixtures, news and predictions tracker for the 2026 World Cup. UK times, BBC/ITV viewing guide.",
+  title: BRAND_TAGLINE,
+  description: BRAND_DESCRIPTION,
 };
 
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/fixtures", label: "Fixtures" },
   { href: "/groups", label: "Groups" },
-  { href: "/knockout", label: "Knockout" },
+  { href: "/knockout", label: "Knockout stages" },
   { href: "/teams", label: "Teams" },
   { href: "/cities", label: "Host Cities" },
   { href: "/news", label: "News" },
@@ -24,8 +24,8 @@ const NAV = [
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB">
-      <body className="min-h-screen bg-wc-cream text-wc-ink">
-        <header className="sticky top-0 z-30 bg-wc-cream/90 backdrop-blur border-b-[3px] border-wc-ink">
+      <body className="pitch min-h-screen text-wc-ink">
+        <header className="sticky top-0 z-30 bg-wc-cream/95 backdrop-blur border-b-[3px] border-wc-ink">
           <div className="mx-auto max-w-7xl px-4 py-3 flex items-center gap-4">
             <Link href="/" className="flex items-center gap-3">
               <Image
@@ -37,8 +37,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 className="rounded-md"
               />
               <span className="font-display text-2xl md:text-3xl leading-none">
-                World Cup<br />
-                <span className="text-wc-magenta">Tracker</span>
+                {BRAND_NAME_TOP}<br />
+                <span className="text-wc-magenta">{BRAND_NAME_BOTTOM}</span>
               </span>
             </Link>
             <nav className="ml-auto flex flex-wrap gap-1 md:gap-2">

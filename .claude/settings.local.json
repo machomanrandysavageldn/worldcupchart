@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Visual: pitch background, brand swap point, countdown contrast *)"
+    ]
+  }
+}

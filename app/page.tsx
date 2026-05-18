@@ -19,17 +19,17 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b-[3px] border-wc-ink">
-        <div className="absolute inset-0 dotted opacity-60 pointer-events-none" />
-        <div className="mx-auto max-w-7xl px-4 py-12 md:py-16 grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
-          <div>
+      <section className="relative overflow-hidden border-b-[3px] border-wc-ink pitch-markings">
+        <div className="absolute inset-0 dotted opacity-40 pointer-events-none" />
+        <div className="relative mx-auto max-w-7xl px-4 py-12 md:py-16 grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
+          <div className="chunky-card bg-wc-cream/95 p-6 md:p-8">
             <div className="text-xs md:text-sm uppercase tracking-[0.25em] font-bold text-wc-magenta mb-2">
               11 June – 19 July 2026 · Canada · Mexico · USA
             </div>
             <h1 className="font-display text-6xl md:text-8xl leading-[0.9]">
               The <span className="text-wc-magenta">family</span><br />
               World Cup<br />
-              <span className="bg-wc-gold px-2">tracker.</span>
+              <span className="text-wc-ink">tracker.</span>
             </h1>
             <p className="mt-4 text-lg max-w-xl">
               Every fixture in UK time, who&rsquo;s on the BBC or ITV, group tables, the knockout

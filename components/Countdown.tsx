@@ -18,12 +18,12 @@ export function Countdown({ iso, label }: { iso: string; label?: string }) {
 
   return (
     <div className="flex flex-col items-start gap-2">
-      {label && <span className="text-xs uppercase tracking-widest font-bold text-wc-deep/70">{label}</span>}
+      {label && <span className="text-xs uppercase tracking-widest font-bold text-wc-gold">{label}</span>}
       <div className="flex gap-2">
         {cells.map((x) => (
-          <div key={x.l} className="chunky-card px-3 py-2 min-w-[64px] text-center bg-white">
-            <div className="font-display text-3xl leading-none">{x.v.toString().padStart(2, "0")}</div>
-            <div className="text-[10px] uppercase tracking-widest text-wc-deep/60 font-semibold">{x.l}</div>
+          <div key={x.l} className="chunky-card px-3 py-2 min-w-[68px] text-center bg-wc-cream">
+            <div className="font-display text-4xl leading-none text-wc-ink">{x.v.toString().padStart(2, "0")}</div>
+            <div className="text-[11px] uppercase tracking-widest text-wc-ink font-bold mt-0.5">{x.l}</div>
           </div>
         ))}
       </div>

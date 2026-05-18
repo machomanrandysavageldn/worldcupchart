@@ -9,15 +9,71 @@
 }
 
 html, body {
-  background: #FFF6E5;
   color: #0B132B;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
+/* ----- Site-wide pitch background ----- */
+/* Light-green football pitch: subtle mowed stripes + grass-fibre texture.
+   Applied to <body> so every page sits on the pitch. */
+body.pitch {
+  background-color: #b8e2a0;
+  background-image:
+    /* mowed stripes — alternating light/dark green */
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.08) 0 120px,
+      rgba(0, 0, 0, 0.06) 120px 240px
+    ),
+    /* fine grass-fibre texture (diagonal noise via overlapping micro-gradients) */
+    repeating-linear-gradient(
+      32deg,
+      rgba(20, 90, 40, 0.18) 0 1px,
+      transparent 1px 3px
+    ),
+    repeating-linear-gradient(
+      -28deg,
+      rgba(10, 70, 30, 0.14) 0 1px,
+      transparent 1px 4px
+    ),
+    /* base radial brightness so the pitch is light, not lurid */
+    radial-gradient(ellipse at top, #cdebb4 0%, #a9d990 60%, #97cd7e 100%);
+  background-attachment: fixed, fixed, fixed, fixed;
+}
+
+/* Pitch markings band — used as a decorative strip behind the hero. */
+.pitch-markings {
+  background-color: #7cc063;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.08) 0 90px,
+      rgba(0, 0, 0, 0.07) 90px 180px
+    );
+}
+.pitch-markings::before,
+.pitch-markings::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+/* Halfway line + centre circle + penalty areas drawn with SVG via background-image. */
+.pitch-markings::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400' preserveAspectRatio='none'><g fill='none' stroke='white' stroke-width='3' stroke-opacity='0.55'><line x1='600' y1='0' x2='600' y2='400'/><circle cx='600' cy='200' r='60'/><circle cx='600' cy='200' r='3' fill='white' stroke='none'/><rect x='0' y='110' width='130' height='180'/><rect x='0' y='160' width='55' height='80'/><rect x='1070' y='110' width='130' height='180'/><rect x='1145' y='160' width='55' height='80'/><path d='M 130 165 A 60 60 0 0 1 130 235' /><path d='M 1070 165 A 60 60 0 0 0 1070 235' /></g></svg>");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* When we want a content surface that sits on the pitch but is readable, use a cream card. */
+.surface-cream {
+  background: #FFF6E5;
+}
+
 .font-display { font-family: 'Bebas Neue', Impact, system-ui, sans-serif; letter-spacing: 0.02em; }
 
-/* Pitch stripes background */
+/* Legacy alias kept so any older usage still renders. */
 .pitch-bg {
   background-image: repeating-linear-gradient(
     90deg,
