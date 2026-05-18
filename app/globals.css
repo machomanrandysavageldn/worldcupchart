@@ -87,17 +87,22 @@ body.pitch {
   padding: 0 0.1em;
 }
 
-.chunky-card {
-  border: 3px solid #0B132B;
-  border-radius: 18px;
-  box-shadow: 6px 6px 0 0 #0B132B;
-  background: white;
-}
-.chunky-btn {
-  border: 3px solid #0B132B;
-  border-radius: 999px;
-  box-shadow: 4px 4px 0 0 #0B132B;
-  transition: transform .08s ease, box-shadow .08s ease;
+/* Wrap in @layer components so Tailwind utilities (bg-wc-cyan etc.) added on the
+   same element win — utilities live in their own layer and would otherwise be
+   beaten by these unlayered rules. */
+@layer components {
+  .chunky-card {
+    border: 3px solid #0B132B;
+    border-radius: 18px;
+    box-shadow: 6px 6px 0 0 #0B132B;
+    background: white;
+  }
+  .chunky-btn {
+    border: 3px solid #0B132B;
+    border-radius: 999px;
+    box-shadow: 4px 4px 0 0 #0B132B;
+    transition: transform .08s ease, box-shadow .08s ease;
+  }
 }
 .chunky-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 0 #0B132B; }
 
