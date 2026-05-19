@@ -12,7 +12,7 @@ export default async function CitiesPage() {
   return (
     <Section title="Host cities" kicker="3 countries · 16 venues · hover for info">
       {/* TODO(asset): swap /fifa/host-cities-grid.jpg for the higher-quality header image when supplied. */}
-      <div className="chunky-card p-2 bg-white mb-8">
+      <div className="chunky-card p-2 bg-white mb-8 max-w-3xl">
         <Image src="/fifa/host-cities-grid.jpg" alt="Host city logos" width={1600} height={800} className="rounded-md w-full" />
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

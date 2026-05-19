@@ -68,7 +68,7 @@ export default function PredictionsPage() {
   const qualifiedCodes = useMemo(() => TEAMS.filter((t) => t.qualified).map((t) => t.code), []);
 
   return (
-    <Section title="Family predictions" kicker="One sheet per family member · saved locally">
+    <Section title="Predictions" kicker="One sheet per player · saved locally">
       <MaestroCelebration
         open={showCelebration}
         memberName={active?.name ?? "Champ"}
@@ -81,7 +81,7 @@ export default function PredictionsPage() {
             <Mascot size={72} />
             <div>
               <div className="font-display text-3xl">Add your first player</div>
-              <p className="text-sm text-wc-deep/70">Each family member gets their own sheet. Picks are saved on this device.</p>
+              <p className="text-sm text-wc-deep/70">Each player gets their own sheet. Picks are saved on this device.</p>
             </div>
           </div>
           <AddMemberInput value={newName} onChange={setNewName} onAdd={addMember} />
@@ -214,7 +214,7 @@ export default function PredictionsPage() {
               </div>
 
               <div className="mt-8 chunky-card p-5 bg-white">
-                <div className="font-display text-2xl mb-2">Family leaderboard</div>
+                <div className="font-display text-2xl mb-2">Leaderboard</div>
                 <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
                   {state.members.map((m) => {
                     const f = countFilled(state.picks[m.id] ?? emptyPicks());
@@ -242,7 +242,7 @@ export default function PredictionsPage() {
                     When the tournament ends…
                   </div>
                   <p className="text-base md:text-lg mt-3 max-w-xl mx-auto">
-                    Pick the actual champion below to reveal who in the family got it right.
+                    Pick the actual champion below to reveal who got it right.
                     Anyone whose pick matches gets the full <strong>Maestro</strong> celebration —
                     confetti, fireworks, the lot.
                   </p>
@@ -304,7 +304,7 @@ function AddMemberInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && onAdd()}
-        placeholder="Family member name"
+        placeholder="Player name"
         className="chunky-btn bg-white px-3 py-2 font-semibold flex-1 min-w-[160px]"
       />
       <button onClick={onAdd} className="chunky-btn bg-wc-magenta text-white px-4 py-2 font-bold">

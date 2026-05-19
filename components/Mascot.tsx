@@ -19,7 +19,7 @@ export function Mascot({ size = 96 }: { size?: number }) {
         alt="World Cup 2026 mascots — Maple, Zayu and Clutch"
         fill
         sizes={`${size}px`}
-        className="object-contain"
+        className="object-contain mix-blend-multiply"
         priority={size > 80}
       />
     </motion.div>

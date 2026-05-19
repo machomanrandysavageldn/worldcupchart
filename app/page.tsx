@@ -65,7 +65,7 @@ export default async function HomePage() {
             </h1>
             <p className="mt-3 md:mt-4 text-base md:text-lg max-w-xl">
               Every fixture in UK time, who&rsquo;s on the BBC or ITV, group tables, the knockout
-              stages, the latest news and a family predictions game. Built for the sofa.
+              stages, the latest news and a predictions game for you and your mates. Built for the sofa.
             </p>
             <div className="mt-5 flex flex-wrap gap-2 md:gap-3">
               <Link href="/fixtures" className="chunky-btn bg-wc-magenta text-white px-4 md:px-5 py-2 font-bold text-sm md:text-base">See all fixtures</Link>
@@ -74,7 +74,10 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative flex items-center justify-center order-1 md:order-2">
-            <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6"><Mascot size={72} /></div>
+            <div className="absolute -top-8 -left-8 md:-top-12 md:-left-16 z-10 drop-shadow-xl">
+              <div className="hidden md:block"><Mascot size={220} /></div>
+              <div className="md:hidden"><Mascot size={140} /></div>
+            </div>
             <div className="chunky-card p-3 md:p-4 bg-white w-full max-w-[220px] md:max-w-none">
               <Image src="/fifa/emblem.jpg" alt="World Cup 26 emblem" width={300} height={420} className="rounded-lg w-full h-auto" priority />
             </div>

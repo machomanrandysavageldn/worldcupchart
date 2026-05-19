@@ -14,7 +14,6 @@ const NAV = [
   { href: "/cities", label: "Host Cities" },
   { href: "/news", label: "News" },
   { href: "/predictions", label: "Predictions" },
-  { href: "/stickers", label: "Stickers" },
 ];
 
 export function SiteHeader() {
