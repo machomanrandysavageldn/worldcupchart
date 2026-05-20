@@ -40,14 +40,16 @@ export default async function TeamPage({ params }: { params: Promise<{ code: str
   const squad = SQUADS[team.code];
 
   // Resolve photos for key figures and notable players in parallel.
+  // Pass the country name so the Wikipedia search fallback can disambiguate
+  // common names ("Wesley footballer Brazil" instead of just "Wesley footballer").
   const [manager, captain, topScorer] = await Promise.all([
-    squad?.manager ? getPlayerInfo(squad.manager.name, squad.manager.wiki) : null,
-    squad?.captain ? getPlayerInfo(squad.captain.name, squad.captain.wiki) : null,
-    squad?.topScorer ? getPlayerInfo(squad.topScorer.name, squad.topScorer.wiki) : null,
+    squad?.manager ? getPlayerInfo(squad.manager.name, squad.manager.wiki, team.name) : null,
+    squad?.captain ? getPlayerInfo(squad.captain.name, squad.captain.wiki, team.name) : null,
+    squad?.topScorer ? getPlayerInfo(squad.topScorer.name, squad.topScorer.wiki, team.name) : null,
   ]);
   // Prefer the full squad when announced; otherwise fall back to the notable subset.
   const roster = squad?.fullSquad ?? squad?.notable ?? [];
-  const rosterInfo = roster.length ? await getPlayersInfo(roster) : [];
+  const rosterInfo = roster.length ? await getPlayersInfo(roster, team.name) : [];
   const isFullSquad = !!squad?.fullSquad?.length;
 
   return (
