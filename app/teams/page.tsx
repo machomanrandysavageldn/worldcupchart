@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/Section";
 import { TEAMS } from "@/lib/teams";
+
+export const metadata: Metadata = {
+  title: "Teams",
+  description: "All 48 qualified nations for the 2026 FIFA World Cup — manager, captain, top scorer and squad as announced.",
+  alternates: { canonical: "/teams" },
+};
 
 export default function TeamsIndex() {
   const qualified = TEAMS.filter((t) => t.qualified).sort((a, b) => a.name.localeCompare(b.name));

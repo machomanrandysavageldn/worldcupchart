@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/Section";
 import { TEAM_BY_CODE, TEAMS } from "@/lib/teams";
@@ -8,10 +9,26 @@ import { SQUADS, type KeyFigure } from "@/lib/squads";
 import { getPlayerInfo, getPlayersInfo, initials, type PlayerInfo } from "@/lib/players";
 import Link from "next/link";
 
-export const revalidate = 86400;
+// Short revalidate so Wikipedia photo updates (and freshly added full squads) appear within an hour.
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return TEAMS.filter((t) => t.qualified).map((t) => ({ code: t.code }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
+  const { code } = await params;
+  const team = TEAM_BY_CODE[code.toUpperCase()];
+  if (!team) return {};
+  return {
+    title: `${team.name} squad & fixtures`,
+    description: `${team.name} at the 2026 FIFA World Cup — manager, captain, top scorer, squad and all fixtures in UK time.`,
+    alternates: { canonical: `/teams/${team.code}` },
+    openGraph: {
+      title: `${team.name} at the 2026 World Cup`,
+      description: `Squad, key figures and fixtures for ${team.name}.`,
+    },
+  };
 }
 
 export default async function TeamPage({ params }: { params: Promise<{ code: string }> }) {
@@ -35,6 +52,12 @@ export default async function TeamPage({ params }: { params: Promise<{ code: str
 
   return (
     <Section title={team.name} kicker={`Team profile · ${matches.length} matches`}>
+      <Link
+        href="/teams"
+        className="chunky-btn inline-flex items-center gap-2 bg-white text-wc-ink px-4 py-2 font-bold text-sm mb-4 hover:bg-wc-gold"
+      >
+        <span aria-hidden>←</span> Back to teams
+      </Link>
       <div className="chunky-card p-6 bg-white mb-6 flex items-center gap-6">
         <div className="text-7xl">{team.flag}</div>
         <div>

@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 import { getNews } from "@/lib/news";
 import { formatDistanceToNow } from "date-fns";
 import type { NewsItem } from "@/lib/types";
 
 export const revalidate = 1800; // 30 mins
+
+export const metadata: Metadata = {
+  title: "News",
+  description: "Latest FIFA World Cup 2026 news, aggregated from BBC Sport, Sky Sports, the Guardian and FIFA. Refreshed every 30 minutes.",
+  alternates: { canonical: "/news" },
+};
 
 function safeAgo(d: string) {
   const t = new Date(d);

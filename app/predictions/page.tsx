@@ -76,12 +76,12 @@ export default function PredictionsPage() {
       />
 
       {!state.members.length ? (
-        <div className="chunky-card p-6 bg-white max-w-2xl">
-          <div className="flex items-center gap-4">
-            <Mascot size={72} />
-            <div>
-              <div className="font-display text-3xl">Add your first player</div>
-              <p className="text-sm text-wc-deep/70">Each family member gets their own sheet. Picks are saved on this device.</p>
+        <div className="chunky-card p-6 md:p-8 bg-white max-w-2xl">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <Mascot size={288} />
+            <div className="text-center sm:text-left">
+              <div className="font-display text-3xl md:text-4xl">Add your first player</div>
+              <p className="text-sm text-wc-deep/70 mt-1">Each family member gets their own sheet. Picks are saved on this device.</p>
             </div>
           </div>
           <AddMemberInput value={newName} onChange={setNewName} onAdd={addMember} />

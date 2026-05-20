@@ -28,29 +28,29 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-30 bg-wc-cream/95 backdrop-blur border-b-[3px] border-wc-ink">
-      <div className="mx-auto max-w-7xl px-4 py-3 flex items-center gap-3">
-        <Link href="/" className="flex items-center gap-2 sm:gap-3 min-w-0">
+      <div className="mx-auto max-w-7xl px-4 py-4 md:py-5 flex items-center gap-3 md:gap-4">
+        <Link href="/" className="flex items-center gap-3 sm:gap-4 min-w-0">
           <Image
             src="/fifa/emblem.jpg"
             alt="World Cup 26 emblem"
-            width={40}
-            height={56}
+            width={64}
+            height={90}
             priority
-            className="rounded-md w-9 h-auto md:w-12"
+            className="rounded-md w-12 h-auto md:w-16"
           />
-          <span className="font-display text-xl md:text-3xl leading-none whitespace-nowrap">
+          <span className="font-display text-2xl md:text-4xl leading-none whitespace-nowrap">
             {BRAND_NAME_TOP}{" "}
             <span className="text-wc-magenta">{BRAND_NAME_BOTTOM}</span>
           </span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="ml-auto hidden lg:flex flex-wrap gap-1 md:gap-2 justify-end">
+        <nav className="ml-auto hidden lg:flex flex-wrap gap-2 justify-end">
           {NAV.map((n) => (
             <Link
               key={n.href}
               href={n.href}
-              className={`px-3 py-1.5 rounded-full font-semibold text-sm border-2 transition ${
+              className={`px-4 py-2 rounded-full font-bold text-base border-2 transition ${
                 pathname === n.href
                   ? "border-wc-ink bg-wc-gold"
                   : "border-transparent hover:border-wc-ink hover:bg-wc-gold"

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/Section";
@@ -14,6 +15,26 @@ export const revalidate = 3600;
 export async function generateStaticParams() {
   const matches = await getAllMatches();
   return matches.map((m) => ({ id: m.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const matches = await getAllMatches();
+  const m = matches.find((x) => x.id === id);
+  if (!m) return {};
+  const home = m.home.code ? teamName(m.home.code) : m.home.placeholder ?? "TBD";
+  const away = m.away.code ? teamName(m.away.code) : m.away.placeholder ?? "TBD";
+  const date = ukDate(m.kickoffUtc);
+  const time = ukTime(m.kickoffUtc);
+  return {
+    title: `${home} v ${away}`,
+    description: `${home} v ${away} — World Cup 2026 match #${m.matchNumber}. Kickoff ${date} at ${time} UK time.`,
+    alternates: { canonical: `/match/${m.id}` },
+    openGraph: {
+      title: `${home} v ${away} · World Cup 2026`,
+      description: `Kickoff ${date} at ${time} UK time.`,
+    },
+  };
 }
 
 export default async function MatchPage({ params }: { params: Promise<{ id: string }> }) {

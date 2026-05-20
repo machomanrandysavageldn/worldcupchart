@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 import { matchesByStage } from "@/lib/fixtures";
 import { ukDate, ukTime } from "@/lib/format";
@@ -5,6 +6,12 @@ import { teamFlag, teamName } from "@/lib/teams";
 import Link from "next/link";
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: "Knockout stages",
+  description: "Full World Cup 2026 knockout bracket — Round of 32 through to the Final, with UK kickoff times and BBC/ITV viewing.",
+  alternates: { canonical: "/knockout" },
+};
 
 const STAGES: { stage: any; title: string; color: string }[] = [
   { stage: "round-of-32", title: "Round of 32", color: "bg-wc-cyan" },

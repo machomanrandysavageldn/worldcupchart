@@ -55,15 +55,15 @@ export default async function HomePage() {
       <section className="relative overflow-hidden border-b-[3px] border-wc-ink pitch-markings">
         <div className="absolute inset-0 dotted opacity-40 pointer-events-none" />
         <div className="relative mx-auto max-w-7xl px-4 py-8 md:py-16 grid md:grid-cols-[1.4fr_1fr] gap-6 md:gap-8 items-center">
-          <div className="chunky-card bg-wc-cream/95 p-5 md:p-8 order-2 md:order-1">
-            <div className="text-[10px] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.25em] font-bold text-wc-magenta mb-2">
+          <div className="chunky-card bg-wc-cream/95 p-5 md:p-10 order-2 md:order-1">
+            <div className="text-xs md:text-base uppercase tracking-[0.2em] md:tracking-[0.25em] font-bold text-wc-magenta mb-2">
               11 June – 19 July 2026 · Canada · Mexico · USA
             </div>
-            <h1 className="font-display text-5xl sm:text-6xl md:text-8xl leading-[0.9]">
+            <h1 className="font-display text-6xl sm:text-7xl md:text-[10rem] leading-[0.9]">
               World Cup<br />
               <span className="text-wc-magenta">Watch.</span>
             </h1>
-            <p className="mt-3 md:mt-4 text-base md:text-lg max-w-xl">
+            <p className="mt-4 md:mt-5 text-lg md:text-xl max-w-xl">
               Every fixture in UK time, who&rsquo;s on the BBC or ITV, group tables, the knockout
               stages, the latest news and a family predictions game. Built for the sofa.
             </p>
@@ -74,9 +74,9 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative flex items-center justify-center order-1 md:order-2">
-            <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6"><Mascot size={72} /></div>
-            <div className="chunky-card p-3 md:p-4 bg-white w-full max-w-[220px] md:max-w-none">
-              <Image src="/fifa/emblem.jpg" alt="World Cup 26 emblem" width={300} height={420} className="rounded-lg w-full h-auto" priority />
+            <div className="absolute -top-4 -left-4 md:-top-8 md:-left-8"><Mascot size={96} /></div>
+            <div className="chunky-card p-3 md:p-5 bg-white w-full max-w-[260px] md:max-w-none">
+              <Image src="/fifa/emblem.jpg" alt="World Cup 26 emblem" width={420} height={588} className="rounded-lg w-full h-auto" priority />
             </div>
           </div>
         </div>

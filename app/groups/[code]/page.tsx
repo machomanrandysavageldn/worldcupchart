@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/Section";
 import { GROUPS, GROUP_COLORS, GROUP_LIST } from "@/lib/groups";
@@ -10,6 +11,19 @@ export const revalidate = 3600;
 
 export function generateStaticParams() {
   return GROUP_LIST.map((code) => ({ code }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
+  const { code } = await params;
+  const upper = code.toUpperCase();
+  const teams = GROUPS[upper];
+  if (!teams) return {};
+  const names = teams.map((c) => teamName(c)).join(", ");
+  return {
+    title: `Group ${upper}`,
+    description: `Group ${upper} of the 2026 FIFA World Cup: ${names}. Fixtures in UK time, standings and qualification rules.`,
+    alternates: { canonical: `/groups/${upper}` },
+  };
 }
 
 export default async function GroupPage({ params }: { params: Promise<{ code: string }> }) {

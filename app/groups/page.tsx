@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/Section";
 import { GROUPS, GROUP_LIST, GROUP_COLORS } from "@/lib/groups";
 import { teamFlag, teamName } from "@/lib/teams";
+
+export const metadata: Metadata = {
+  title: "Group stage",
+  description: "All 12 groups of the 2026 FIFA World Cup with the four teams in each, qualification rules and links to group tables.",
+  alternates: { canonical: "/groups" },
+};
 
 export default function GroupsIndex() {
   return (

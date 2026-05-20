@@ -1,0 +1,29 @@
+# World Cup Watch
+
+> Family-friendly UK tracker for the 2026 FIFA World Cup (11 June – 19 July 2026, Canada · Mexico · USA). All fixtures in UK time, BBC/ITV viewing badges, group tables, knockout bracket, news aggregator and family predictions game. Non-commercial.
+
+## Key facts
+
+- Tournament: FIFA World Cup 2026
+- Dates: 11 June 2026 – 19 July 2026
+- Hosts: Canada, Mexico, United States (16 host cities)
+- Format: 48 teams, 12 groups of 4, 104 matches
+- Opening match: Mexico v South Africa (M001)
+- Final: 19 July 2026, MetLife Stadium, New York/New Jersey
+- Audience focus: UK viewers — times in Europe/London, broadcaster (BBC/ITV) badges on every match.
+
+## Pages
+
+- [Home](https://worldcupchart.vercel.app/): hero, countdown to opener, today's matches, group overview.
+- [Fixtures](https://worldcupchart.vercel.app/fixtures): all 104 matches in UK time with BBC/ITV badges.
+- [Groups](https://worldcupchart.vercel.app/groups): 12 group pages with teams, standings and rules.
+- [Knockout stages](https://worldcupchart.vercel.app/knockout): full bracket from Round of 32 to Final, plus third-place play-off.
+- [Teams](https://worldcupchart.vercel.app/teams): all 48 qualified nations with manager, captain, top scorer and squad.
+- [Host cities](https://worldcupchart.vercel.app/cities): 16 cities across 3 countries with Wikipedia summaries.
+- [News](https://worldcupchart.vercel.app/news): aggregated from BBC Sport, Sky Sports, Guardian, FIFA.
+- [Predictions](https://worldcupchart.vercel.app/predictions): family game — group winners, semis, finalists, champion, golden boot. Stored locally per device.
+- [Stickers](https://worldcupchart.vercel.app/stickers): collect-all sticker book of the 48 qualifiers.
+
+## Non-commercial
+
+This is a personal family project. FIFA marks are used editorially under the FIFA IP Guidelines (June 2024 v2.0).
