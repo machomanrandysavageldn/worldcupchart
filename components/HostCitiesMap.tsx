@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { VENUES } from "@/lib/venues";
 import type { WikiSummary } from "@/lib/wiki";
+import { CANADA_PATH, USA_PATH, MEXICO_PATH } from "@/lib/north-america-paths";
 
 // Per-city label tweaks: shorter labels where the full name overflows, and
 // label position offsets where markers cluster (NE US, Mexico's two cities).
@@ -38,27 +39,18 @@ function project(lat: number, lng: number) {
   return { x, y };
 }
 
-// Three country polygons. The USA top edge / Canada bottom edge are mirrored,
-// and likewise USA bottom / Mexico top — so the borders overlap visually
-// (which renders as a clean shared border under the same stroke).
+// Country path data comes from lib/north-america-paths.ts — real outlines
+// projected from Natural Earth 110m boundaries.
 
-const CANADA_PATH =
-  "M 40,60 L 80,50 L 170,35 L 300,25 L 430,22 L 560,28 L 660,45 L 720,70 L 750,100 L 775,135 L 785,170 L 780,200 L 770,220 L 740,232 L 705,220 L 670,225 L 640,240 L 620,250 L 600,240 L 560,220 L 500,205 L 400,205 L 300,200 L 210,195 L 130,175 L 86,143 L 78,108 L 65,75 L 50,60 Z";
-
-const USA_PATH =
-  "M 86,143 L 130,175 L 210,195 L 300,200 L 400,205 L 500,205 L 560,220 L 600,240 L 620,250 L 640,240 L 670,225 L 705,220 L 740,232 L 740,265 L 725,295 L 720,335 L 710,370 L 690,405 L 665,440 L 640,468 L 622,492 L 628,515 L 630,540 L 625,562 L 620,568 L 615,548 L 605,528 L 595,510 L 580,498 L 555,485 L 520,478 L 480,475 L 445,478 L 425,505 L 390,478 L 355,455 L 320,440 L 270,425 L 220,412 L 200,405 L 141,381 L 92,323 L 74,265 L 74,191 L 86,143 Z";
-
-const MEXICO_PATH =
-  "M 200,405 L 220,412 L 270,425 L 320,440 L 355,455 L 390,478 L 425,505 L 440,498 L 455,510 L 465,535 L 475,548 L 488,545 L 495,530 L 488,515 L 465,525 L 445,548 L 430,575 L 415,608 L 395,625 L 365,628 L 335,620 L 305,602 L 275,580 L 245,555 L 220,520 L 200,478 L 185,440 L 195,418 L 200,405 Z";
-
-// Great Lakes — five simplified ovals positioned roughly. Pure decoration
-// that helps the map "read" as North America.
+// Great Lakes — Natural Earth boundaries run straight through the lakes
+// (international border lies in their middle), so without these overlays
+// the lakes would render as solid land. Approximate positions and sizes.
 const LAKES: { cx: number; cy: number; rx: number; ry: number }[] = [
-  { cx: 530, cy: 215, rx: 28, ry: 9 }, // Superior
-  { cx: 565, cy: 225, rx: 12, ry: 7 }, // Michigan-ish top
-  { cx: 565, cy: 235, rx: 9, ry: 12 }, // Michigan body
-  { cx: 595, cy: 230, rx: 14, ry: 6 }, // Huron-Erie blob
-  { cx: 625, cy: 235, rx: 9, ry: 4 }, // Ontario
+  { cx: 510, cy: 245, rx: 28, ry: 8 }, // Lake Superior
+  { cx: 545, cy: 270, rx: 8, ry: 18 }, // Lake Michigan
+  { cx: 567, cy: 252, rx: 12, ry: 8 }, // Lake Huron
+  { cx: 595, cy: 268, rx: 14, ry: 5 }, // Lake Erie
+  { cx: 620, cy: 258, rx: 11, ry: 4 }, // Lake Ontario
 ];
 
 export function HostCitiesMap({
@@ -80,40 +72,43 @@ export function HostCitiesMap({
           aria-label="Map of FIFA World Cup 2026 host cities across Canada, USA and Mexico"
         >
           {/* Ocean */}
-          <rect width={VIEW_W} height={VIEW_H} fill="#CCE6F7" />
+          <rect width={VIEW_W} height={VIEW_H} fill="#D9EAF7" />
 
-          {/* Countries — same family of greens to feel like one connected
-              landmass, but each gets its own fill so the eye reads three
-              countries. */}
-          <g stroke="#0B132B" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round">
-            <path d={CANADA_PATH} fill="#9BD8B3" />
-            <path d={USA_PATH} fill="#B5E2C4" />
-            <path d={MEXICO_PATH} fill="#9BD8B3" />
+          {/* Countries — restrained map-style palette, each with its own
+              fill so the eye reads three countries, thin border. */}
+          <g stroke="#5C6B7A" strokeWidth="0.8" strokeLinejoin="round" strokeLinecap="round" fillRule="evenodd">
+            <path d={CANADA_PATH} fill="#E8E2CF" />
+            <path d={USA_PATH} fill="#EFEAD8" />
+            <path d={MEXICO_PATH} fill="#E8E2CF" />
           </g>
 
-          {/* Great Lakes — pure decoration to anchor the visual */}
-          <g stroke="#0B132B" strokeWidth="1.5" fill="#CCE6F7">
+          {/* International borders — slightly darker line tracing the same
+              shapes, no fill, to give the borders presence over neighbouring
+              countries. */}
+          <g stroke="#3F4A55" strokeWidth="1.2" fill="none" strokeLinejoin="round">
+            <path d={CANADA_PATH} />
+            <path d={USA_PATH} />
+            <path d={MEXICO_PATH} />
+          </g>
+
+          {/* Great Lakes */}
+          <g stroke="#5C6B7A" strokeWidth="0.6" fill="#D9EAF7">
             {LAKES.map((l, i) => (
               <ellipse key={i} cx={l.cx} cy={l.cy} rx={l.rx} ry={l.ry} />
             ))}
           </g>
 
-          {/* Country labels — large, faded so they don't compete with the markers */}
+          {/* Country labels — restrained, classic-map style */}
           <g
-            fontFamily='"Bebas Neue", system-ui, sans-serif'
+            fontFamily='"Inter", "Helvetica Neue", system-ui, sans-serif'
             textAnchor="middle"
-            fill="#0B132B"
-            fontWeight="700"
+            fill="#3F4A55"
+            fontWeight="600"
+            letterSpacing="6"
           >
-            <text x="350" y="100" fontSize="42" opacity="0.35" letterSpacing="2">
-              CANADA
-            </text>
-            <text x="380" y="340" fontSize="48" opacity="0.35" letterSpacing="2">
-              USA
-            </text>
-            <text x="300" y="595" fontSize="36" opacity="0.35" letterSpacing="2">
-              MEXICO
-            </text>
+            <text x="370" y="95" fontSize="20" opacity="0.55">CANADA</text>
+            <text x="380" y="345" fontSize="22" opacity="0.55">UNITED STATES</text>
+            <text x="280" y="540" fontSize="18" opacity="0.55">MEXICO</text>
           </g>
         </svg>
 
@@ -147,8 +142,8 @@ export function HostCitiesMap({
                 aria-expanded={isActive}
               >
                 <div
-                  className={`w-8 h-8 md:w-10 md:h-10 rounded-full border-[3px] border-wc-ink flex items-center justify-center text-base md:text-xl shadow-[3px_3px_0_0_#0B132B] hover:scale-110 hover:shadow-[4px_4px_0_0_#0B132B] transition cursor-pointer ${
-                    isActive ? "scale-110 ring-4 ring-wc-gold" : ""
+                  className={`w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-wc-ink flex items-center justify-center text-sm md:text-base shadow-sm hover:scale-125 transition cursor-pointer ${
+                    isActive ? "scale-125 ring-2 ring-wc-gold" : ""
                   }`}
                   style={{ backgroundColor: "#FFFFFF" }}
                 >

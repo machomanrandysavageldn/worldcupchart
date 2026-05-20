@@ -26,15 +26,15 @@ export function CityCard({ venue, wiki }: { venue: Venue; wiki: WikiSummary | nu
     >
       <button
         onClick={() => setOpen((x) => !x)}
-        className="chunky-card p-4 text-white text-left w-full hover:translate-y-[-3px] transition"
+        className="chunky-card p-3 text-white text-left w-full hover:translate-y-[-2px] transition flex items-center gap-3"
         style={{ backgroundColor: venue.color }}
         aria-expanded={open}
       >
-        <div className="text-3xl">{venue.emoji}</div>
-        <div className="font-display text-2xl leading-none mt-2">{venue.city}</div>
-        <div className="text-xs uppercase tracking-widest font-bold mt-1 opacity-90">{venue.country}</div>
-        <div className="text-sm mt-2 font-semibold opacity-95">{venue.stadium}</div>
-        <div className="text-[10px] mt-2 opacity-80 uppercase tracking-widest">Hover for info →</div>
+        <div className="text-2xl shrink-0">{venue.emoji}</div>
+        <div className="min-w-0 flex-1">
+          <div className="font-display text-lg leading-tight truncate">{venue.city}</div>
+          <div className="text-[11px] font-semibold opacity-95 truncate">{venue.stadium}</div>
+        </div>
       </button>
 
       <AnimatePresence>

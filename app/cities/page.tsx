@@ -22,7 +22,7 @@ export default async function CitiesPage() {
   return (
     <Section title="Host cities" kicker="3 countries · 16 venues · hover a football">
       <HostCitiesMap wikis={wikiByCity} />
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3">
         {VENUES.map((v, i) => (
           <CityCard key={v.city} venue={v} wiki={wikis[i]} />
         ))}
