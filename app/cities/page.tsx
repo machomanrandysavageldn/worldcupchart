@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Section } from "@/components/Section";
 import { VENUES } from "@/lib/venues";
 import { getWikiSummary } from "@/lib/wiki";
 import { CityCard } from "@/components/CityCard";
+import { HostCitiesMap } from "@/components/HostCitiesMap";
 
 export const revalidate = 86400; // 1 day
 
@@ -15,13 +15,13 @@ export const metadata: Metadata = {
 
 export default async function CitiesPage() {
   const wikis = await Promise.all(VENUES.map((v) => getWikiSummary(v.wiki)));
+  const wikiByCity: Record<string, (typeof wikis)[number]> = Object.fromEntries(
+    VENUES.map((v, i) => [v.city, wikis[i]])
+  );
 
   return (
-    <Section title="Host cities" kicker="3 countries · 16 venues · hover for info">
-      {/* Header image kept moderate — ~max-w-4xl, centred. */}
-      <div className="chunky-card p-2 bg-white mb-8 max-w-4xl mx-auto">
-        <Image src="/fifa/host-cities-grid.jpg" alt="Host city logos" width={1600} height={800} className="rounded-md w-full" />
-      </div>
+    <Section title="Host cities" kicker="3 countries · 16 venues · hover a football">
+      <HostCitiesMap wikis={wikiByCity} />
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {VENUES.map((v, i) => (
           <CityCard key={v.city} venue={v} wiki={wikis[i]} />
