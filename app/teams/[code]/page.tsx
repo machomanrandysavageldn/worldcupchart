@@ -162,16 +162,32 @@ function KeyFigureCard({
 }
 
 function PlayerCard({ figure, info }: { figure: KeyFigure; info?: PlayerInfo }) {
-  return (
-    <a
-      href={info?.url ?? "#"}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="chunky-card p-3 bg-white hover:translate-y-[-2px] transition flex flex-col items-center text-center"
-    >
+  // Only render a link when we actually have a destination AND a photo —
+  // otherwise the click feels broken (opens a new tab to a generic search or
+  // a thin stub article). Without a photo, keep it as a static card.
+  const linkable = !!(info?.url && info?.thumbnail);
+  const inner = (
+    <>
       <PlayerAvatar name={figure.name} thumbnail={info?.thumbnail} size={80} />
       <div className="font-bold text-sm mt-2 leading-tight">{figure.name}</div>
-    </a>
+    </>
+  );
+  if (linkable) {
+    return (
+      <a
+        href={info!.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="chunky-card p-3 bg-white hover:translate-y-[-2px] transition flex flex-col items-center text-center"
+      >
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <div className="chunky-card p-3 bg-white flex flex-col items-center text-center" aria-label={figure.name}>
+      {inner}
+    </div>
   );
 }
 

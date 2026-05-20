@@ -22,7 +22,6 @@
 - [Host cities](https://worldcupchart.vercel.app/cities): 16 cities across 3 countries with Wikipedia summaries.
 - [News](https://worldcupchart.vercel.app/news): aggregated from BBC Sport, Sky Sports, Guardian, FIFA.
 - [Predictions](https://worldcupchart.vercel.app/predictions): family game — group winners, semis, finalists, champion, golden boot. Stored locally per device.
-- [Stickers](https://worldcupchart.vercel.app/stickers): collect-all sticker book of the 48 qualifiers.
 
 ## Non-commercial
 
