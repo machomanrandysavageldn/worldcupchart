@@ -4,7 +4,7 @@ import Image from "next/image";
 import { BRAND_DESCRIPTION, BRAND_TAGLINE } from "@/lib/brand";
 import { SiteHeader } from "@/components/SiteHeader";
 
-const SITE_URL = "https://worldcupchart.vercel.app";
+const SITE_URL = "https://worldcupwatch.lol";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

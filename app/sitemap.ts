@@ -3,7 +3,7 @@ import { TEAMS } from "@/lib/teams";
 import { GROUP_LIST } from "@/lib/groups";
 import { getAllMatches } from "@/lib/fixtures";
 
-const SITE_URL = "https://worldcupchart.vercel.app";
+const SITE_URL = "https://worldcupwatch.lol";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
