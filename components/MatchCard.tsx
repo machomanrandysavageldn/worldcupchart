@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { Match } from "@/lib/types";
 import { teamFlag, teamName } from "@/lib/teams";
-import { ukDate, ukTime } from "@/lib/format";
 import { BroadcasterBadge } from "./BroadcasterBadge";
+import { LocalDate, LocalTime } from "./LocalTime";
 
 export function MatchCard({ m, compact = false }: { m: Match; compact?: boolean }) {
   const homeName = m.home.code ? teamName(m.home.code) : m.home.placeholder ?? "TBD";
@@ -15,7 +15,7 @@ export function MatchCard({ m, compact = false }: { m: Match; compact?: boolean 
           <span className="uppercase tracking-widest">
             {m.stage === "group" ? `Group ${m.group}` : labelForStage(m.stage)} · #{m.matchNumber}
           </span>
-          <span>{ukDate(m.kickoffUtc)} · {ukTime(m.kickoffUtc)}</span>
+          <span><LocalDate iso={m.kickoffUtc} /> · <LocalTime iso={m.kickoffUtc} /></span>
         </div>
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
           <TeamSide flag={teamFlag(m.home.code)} name={homeName} score={m.home.score} align="right" />

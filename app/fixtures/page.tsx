@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default async function FixturesPage() {
   const matches = await getAllMatches();
   return (
-    <Section title="Fixtures" kicker={`${matches.length} matches · UK times`}>
+    <Section title="Fixtures" kicker={`${matches.length} matches · your local time`}>
       <FixturesFilter matches={matches} />
     </Section>
   );

@@ -5,6 +5,7 @@ import { Section } from "@/components/Section";
 import { getAllMatches } from "@/lib/fixtures";
 import { teamFlag, teamName } from "@/lib/teams";
 import { ukDate, ukTime } from "@/lib/format";
+import { LocalDate, LocalTime } from "@/components/LocalTime";
 import { Countdown } from "@/components/Countdown";
 import { BroadcasterBadge } from "@/components/BroadcasterBadge";
 import { LiveScore } from "@/components/LiveScore";
@@ -59,7 +60,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
             <div>
               <div className="font-display text-6xl text-wc-magenta">vs</div>
               <div className="text-xs uppercase tracking-widest font-bold text-wc-deep/70 mt-3">
-                {ukDate(m.kickoffUtc)}<br />{ukTime(m.kickoffUtc)} UK
+                <LocalDate iso={m.kickoffUtc} /><br /><LocalTime iso={m.kickoffUtc} />
               </div>
             </div>
             <div>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 import { matchesByStage } from "@/lib/fixtures";
-import { ukDate, ukTime } from "@/lib/format";
 import { teamFlag, teamName } from "@/lib/teams";
+import { LocalDate, LocalTime } from "@/components/LocalTime";
 import Link from "next/link";
 import { Fragment } from "react";
 
@@ -108,7 +108,7 @@ function BracketCard({ m }: { m: any }) {
       className="relative block chunky-card p-3 bg-white hover:translate-y-[-2px] transition"
     >
       <div className="text-[10px] uppercase tracking-widest font-bold text-wc-deep/70">
-        #{m.matchNumber} · {ukDate(m.kickoffUtc)} · {ukTime(m.kickoffUtc)}
+        #{m.matchNumber} · <LocalDate iso={m.kickoffUtc} /> · <LocalTime iso={m.kickoffUtc} />
       </div>
       <div className="font-bold mt-1 text-sm flex items-center gap-1">
         <span className="text-lg">{teamFlag(m.home.code)}</span>
