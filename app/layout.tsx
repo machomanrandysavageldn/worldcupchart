@@ -115,6 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="mx-auto max-w-7xl px-4 py-6 md:py-8 text-xs md:text-sm flex flex-wrap gap-3 md:gap-4 items-center">
             <Image src="/fifa/wordmark.png" alt="FIFA World Cup" width={120} height={18} className="h-4 md:h-5 w-auto" />
             <span>World Cup Watch · Family · UK times · Non-commercial</span>
+            <span>Made just for fun by football lovers. Got questions? <a href="mailto:worldcupwatch@holdtight.cc" className="underline hover:text-wc-gold">worldcupwatch@holdtight.cc</a></span>
             <span className="md:ml-auto opacity-70">
               Data: Football-Data.org · BBC/Sky/Guardian RSS · FIFA editorial assets
             </span>
